@@ -87,7 +87,7 @@ export default function Page() {
               {/* Center Character Overlay */}
               <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-40 pointer-events-none w-[90vw] max-w-[500px] h-[75svh] flex justify-center items-end">
                 <Image
-                  src="/assets/hero-image.png"
+                  src="/assets/hero-image-v2.png"
                   alt="Hero Character"
                   fill
                   className="object-contain object-bottom"
