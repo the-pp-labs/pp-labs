@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --color-ink: #0A0A0A;
+  --color-paper: #FFFFFF;
+  --color-smoke: #F2F2F2;
+  --color-ash: #8A8A8A;
+  --color-accent: #E63329;
+  
+  --font-display: var(--font-anton), "Archivo Black", Impact, sans-serif;
+  --font-ui: var(--font-montserrat), Inter, system-ui, sans-serif;
+  
+  --animate-arrow-loop: arrow-loop 0.9s infinite;
+  
+  @keyframes arrow-loop {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
   }
+  
+  --animate-spin-slow: spin-slow 40s linear infinite;
+  
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
+
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Base resets */
+* {
+  box-sizing: border-box;
+}
+
+/* 3D Scene setup */
+.ring-scene {
+  perspective: 2200px;
+  perspective-origin: 50% 45%;
+}
+
+.ring {
+  transform-style: preserve-3d;
+}
+
+.project-card {
+  opacity: var(--card-opacity, 1);
+  transform: scale(var(--card-scale, 1)) translateZ(0px);
+  filter: grayscale(1) blur(var(--card-blur, 0px));
+}
+
+.project-card:hover {
+  opacity: 1 !important;
+  transform: scale(1.06) translateZ(70px) !important;
+  filter: grayscale(0) blur(0) !important;
+  outline: 2px solid var(--color-accent);
+  outline-offset: 6px;
 }

@@ -1,69 +1,107 @@
+import React from "react";
 import Image from "next/image";
+import { Navbar } from "@/components/Navbar";
+import { ExploreButton } from "@/components/ExploreButton";
+import { ArcCarousel } from "@/components/ArcCarousel";
+import { ScrollStage } from "@/components/ScrollStage";
+import { ScrollSection } from "@/components/ScrollSection";
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="bg-transparent w-full">
+      {/* Fixed Footer Revealed Natively */}
+      <footer className="fixed bottom-0 left-0 w-full min-h-[100svh] bg-ink flex flex-col items-center justify-center text-paper -z-10">
+        <h1 className="text-4xl md:text-6xl font-display font-black tracking-widest uppercase mb-4">
+          FOOTER
+        </h1>
+        <p className="text-sm md:text-base font-ui text-paper/60 uppercase tracking-[0.3em]">
+          Revealed from underneath
+        </p>
+      </footer>
+
+      {/* Opaque Content Wrapper to cover the footer until scroll finishes */}
+      <div className="relative z-10 w-full bg-paper">
+        <ScrollStage>
+          {/* Layer 1: The Existing Homepage */}
+          <ScrollSection>
+            <main className="relative h-[100svh] w-full bg-paper overflow-hidden">
+              <Navbar />
+              
+              {/* 3D DESIGN Background Text */}
+              <div className="absolute top-[18%] left-0 right-0 z-10 pointer-events-none flex justify-center">
+                <h1 className="text-[14vw] font-display font-black tracking-tight text-ink uppercase leading-none">
+                  3D DESIGN
+                </h1>
+              </div>
+
+              <div className="relative z-20">
+                <ArcCarousel />
+              </div>
+
+              {/* Side Texts */}
+              <div className="absolute bottom-[22%] w-full left-0 z-30 pointer-events-none">
+                <p className="absolute right-[55%] md:right-[calc(50%+150px)] top-0 font-ui text-[10px] md:text-xs lg:text-sm font-bold uppercase tracking-widest text-ink transform -rotate-3 whitespace-nowrap">
+                  FOUNDING ENGINEER
+                </p>
+                <p className="absolute left-[55%] md:left-[calc(50%+200px)] top-0 font-ui text-[10px] md:text-xs lg:text-sm font-bold uppercase tracking-widest text-ink transform rotate-3 whitespace-nowrap">
+                  END-TO-END / FULL STACK
+                </p>
+              </div>
+
+              {/* Center Character Overlay */}
+              <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-40 pointer-events-none w-[90vw] max-w-[500px] h-[75svh] flex justify-center items-end">
+                <Image
+                  src="/assets/hero-image.png"
+                  alt="Hero Character"
+                  fill
+                  className="object-contain object-bottom drop-shadow-2xl"
+                  priority
+                />
+              </div>
+            </main>
+          </ScrollSection>
+
+          {/* Layer 2: Section 2 Placeholder */}
+          <ScrollSection>
+            <div className="relative w-full h-full bg-[#111] flex flex-col items-center justify-center text-paper border-t border-paper/10 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
+              <ExploreButton />
+              <h1 className="text-4xl md:text-6xl font-display font-black tracking-widest uppercase mb-4">
+                SECTION 2
+              </h1>
+              <p className="text-sm md:text-base font-ui text-paper/60 uppercase tracking-[0.3em]">
+                Placeholder Content
+              </p>
+            </div>
+          </ScrollSection>
+
+          {/* Layer 3: Section 3 Placeholder */}
+          <ScrollSection>
+            <div className="w-full h-full bg-paper flex flex-col items-center justify-center text-ink border-t border-ink/10 shadow-[0_-20px_50px_rgba(0,0,0,0.1)]">
+              <h1 className="text-4xl md:text-6xl font-display font-black tracking-widest uppercase mb-4">
+                SECTION 3
+              </h1>
+              <p className="text-sm md:text-base font-ui text-ink/60 uppercase tracking-[0.3em]">
+                Placeholder Content
+              </p>
+            </div>
+          </ScrollSection>
+
+          {/* Layer 4: Section 4 Placeholder */}
+          <ScrollSection>
+            <div className="w-full h-full bg-[#f4f4f4] flex flex-col items-center justify-center text-ink border-t border-ink/10 shadow-[0_-20px_50px_rgba(0,0,0,0.1)] shadow-[0_30px_60px_rgba(0,0,0,0.5)] relative z-10">
+              <h1 className="text-4xl md:text-6xl font-display font-black tracking-widest uppercase mb-4">
+                SECTION 4
+              </h1>
+              <p className="text-sm md:text-base font-ui text-ink/60 uppercase tracking-[0.3em]">
+                Placeholder Content
+              </p>
+            </div>
+          </ScrollSection>
+        </ScrollStage>
+      </div>
+      
+      {/* Spacer to allow scrolling past the ScrollStage to reveal the fixed footer */}
+      <div className="w-full min-h-[100svh] pointer-events-none relative z-0"></div>
     </div>
   );
 }
