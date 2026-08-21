@@ -84,7 +84,10 @@ export function ScrollStage({ children }: ScrollStageProps) {
             ref: (el: HTMLDivElement | null) => {
               sectionsRef.current[index] = el;
             },
-            zIndex: index + 1, // Sequential z-index stacking
+            style: {
+              ...(child.props.style || {}),
+              zIndex: index + 1, // Sequential z-index stacking applied directly to styles
+            },
           });
         }
         return child;

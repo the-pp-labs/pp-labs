@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { Navbar } from "@/components/Navbar";
 import { ExploreButton } from "@/components/ExploreButton";
 import { ArcCarousel } from "@/components/ArcCarousel";
 import { ScrollStage } from "@/components/ScrollStage";
@@ -25,8 +24,6 @@ export default function Page() {
           {/* Layer 1: The Existing Homepage */}
           <ScrollSection>
             <main className="relative h-[100svh] w-full bg-paper overflow-hidden">
-              <Navbar />
-              
               {/* 3D DESIGN Background Text */}
               <div className="absolute top-[18%] left-0 right-0 z-10 pointer-events-none flex justify-center">
                 <h1 className="text-[14vw] font-display font-black tracking-tight text-ink uppercase leading-none">
