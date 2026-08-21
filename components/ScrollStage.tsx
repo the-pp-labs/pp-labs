@@ -7,6 +7,12 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  
+  // Disable automatic scroll restoration so the page always loads at the top,
+  // preventing GSAP sections from rendering halfway through their animation on refresh.
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual';
+  }
 }
 
 interface ScrollStageProps {
@@ -23,6 +29,9 @@ export function ScrollStage({ children }: ScrollStageProps) {
   useEffect(() => {
     if (!containerRef.current || childrenArray.length === 0) return;
     
+    // Force scroll to top on mount so the presentation always starts fresh
+    window.scrollTo(0, 0);
+
     const sections = sectionsRef.current.filter(Boolean);
     if (sections.length < 2) return;
 
