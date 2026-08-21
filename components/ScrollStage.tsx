@@ -40,7 +40,7 @@ export function ScrollStage({ children }: ScrollStageProps) {
       return;
     }
 
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       // Set all sections except the first one to be 100% translated down
       gsap.set(sections.slice(1), { yPercent: 100 });
 
@@ -58,7 +58,7 @@ export function ScrollStage({ children }: ScrollStageProps) {
 
       // Animate each section sequentially
       sections.forEach((sec, i) => {
-        if (i === 0) return; // First section is already in place
+        if (i === 0 || !sec) return; // First section is already in place
         
         const exploreBtn = sec.querySelector('.explore-tab');
 
@@ -89,12 +89,13 @@ export function ScrollStage({ children }: ScrollStageProps) {
     <div ref={containerRef} className="relative w-full h-[100svh] overflow-hidden">
       {React.Children.map(children, (child, index) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child as React.ReactElement<any>, {
+          const validChild = child as React.ReactElement<React.HTMLProps<HTMLDivElement>>;
+          return React.cloneElement(validChild, {
             ref: (el: HTMLDivElement | null) => {
               sectionsRef.current[index] = el;
             },
             style: {
-              ...(child.props.style || {}),
+              ...(validChild.props.style || {}),
               zIndex: index + 1, // Sequential z-index stacking applied directly to styles
             },
           });

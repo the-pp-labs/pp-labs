@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ProjectCard, Project } from "./ProjectCard";
 
@@ -20,7 +20,6 @@ export function ArcCarousel() {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const progressRef = useRef(0);
   const hoverRef = useRef(false);
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
 
   // Parallax refs
   const mouseX = useRef(0);
@@ -28,7 +27,7 @@ export function ArcCarousel() {
   const currentRotateY = useRef(0);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       // Configuration for the 3D arc
       const radiusX = typeof window !== "undefined" && window.innerWidth < 768 ? 400 : 900;
       const radiusZ = typeof window !== "undefined" && window.innerWidth < 768 ? 300 : 600;
@@ -48,9 +47,6 @@ export function ArcCarousel() {
         if (containerRef.current) {
           containerRef.current.style.transform = `rotateY(${currentRotateY.current}deg)`;
         }
-
-        let minAbsX = Infinity;
-        let centerCardIndex = 0;
 
         cardsRef.current.forEach((card, index) => {
           if (!card) return;
@@ -80,12 +76,6 @@ export function ArcCarousel() {
           const normalizedDepth = (z + radiusZ) / (radiusZ * 2); // 0 at center, 1 at back of camera
           const scale = 0.7 + normalizedDepth * 0.6;
 
-          // Determine which card is in the center of the bowl (closest to x=0 and in the back)
-          if (z < 0 && Math.abs(x) < minAbsX) {
-            minAbsX = Math.abs(x);
-            centerCardIndex = index;
-          }
-
           // Rotation to make cards face inward (concave)
           // angle=0 -> 0deg, angle=PI/4 -> -45deg (faces center)
           const rotateY = -angle * (180 / Math.PI);
@@ -101,8 +91,6 @@ export function ArcCarousel() {
             rotateY: rotateY,
           });
         });
-
-        setActiveCardIndex(centerCardIndex);
       };
 
       gsap.ticker.add(updateCards);
