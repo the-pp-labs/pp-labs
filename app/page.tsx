@@ -8,6 +8,7 @@ import { RumikSection } from "@/components/RumikSection";
 import { DhanamSection } from "@/components/DhanamSection";
 import { VabhaaSection } from "@/components/VabhaaSection";
 import { CtaSection } from "@/components/CtaSection";
+import { RotatingText } from "@/components/RotatingText";
 
 export default function Page() {
   return (
@@ -67,10 +68,10 @@ export default function Page() {
               {/* Background Text (Desktop removed per request) */}
 
               {/* Background Text (Mobile) */}
-              <div className="md:hidden absolute top-[18%] left-0 right-0 z-10 pointer-events-none flex items-center justify-center text-center">
-                <h1 className="text-[12vw] font-display font-bold tracking-tight text-ink uppercase leading-none whitespace-nowrap">
-                  PRODUCT DESIGN
-                </h1>
+              <div className="md:hidden absolute top-[15%] left-0 right-0 z-10 pointer-events-none flex items-center justify-center">
+                <div className="text-[12vw] font-display font-medium tracking-normal text-ink uppercase leading-none whitespace-nowrap w-full">
+                  <RotatingText />
+                </div>
               </div>
 
               <div className="relative z-20">
@@ -90,7 +91,7 @@ export default function Page() {
               {/* Scrolling Bar (Mobile Only) */}
               <div className="md:hidden absolute bottom-4 w-full left-0 z-30 pointer-events-none overflow-hidden whitespace-nowrap py-2 border-y border-ink/10 flex">
                 <div className="inline-block animate-marquee font-ui text-[10px] font-bold uppercase tracking-widest text-ink whitespace-nowrap">
-                  FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • 
+                  FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK •
                 </div>
               </div>
 

@@ -47,7 +47,7 @@ function ScrollStageInner({ children }: ScrollStageProps) {
     const ctx = gsap.context(() => {
       // Set all sections except the first one to be 100% translated down
       gsap.set(sections.slice(1), { yPercent: 100 });
-      
+
       // Mark as ready once GSAP has safely pushed everything down
       setIsReady(true);
 
@@ -120,7 +120,7 @@ function ScrollStageInner({ children }: ScrollStageProps) {
         opacity: 0,
         ease: "none",
         duration: 0.2, // fast fade
-      }, "-=0.2"); 
+      }, "-=0.2");
     }, containerRef);
 
     return () => {
