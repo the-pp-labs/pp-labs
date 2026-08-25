@@ -46,9 +46,14 @@ export function VabhaaSection() {
         </p>
 
         {/* CTA */}
-        <button className="group relative inline-flex items-center font-ui text-xs md:text-[10px] font-semibold tracking-widest uppercase transition-all px-8 py-3 md:px-6 md:py-2.5 bg-[#8B2E2E] text-[#FDFBF7] rounded-full hover:bg-[#722323] shadow-md">
+        <a 
+          href="https://vabhaa.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative inline-flex items-center font-ui text-xs md:text-[10px] font-semibold tracking-widest uppercase transition-all px-8 py-3 md:px-6 md:py-2.5 bg-[#8B2E2E] text-[#FDFBF7] rounded-full hover:bg-[#722323] shadow-md"
+        >
           SHOP THE PANTRY &nbsp; →
-        </button>
+        </a>
 
       </div>
 

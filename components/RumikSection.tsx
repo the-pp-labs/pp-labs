@@ -84,12 +84,17 @@ export function RumikSection() {
 
         {/* CTA */}
         <div>
-          <button className="group relative inline-flex items-center font-ui text-sm md:text-sm font-semibold tracking-widest uppercase transition-all">
+          <a 
+            href="https://rumik.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center font-ui text-sm md:text-sm font-semibold tracking-widest uppercase transition-all"
+          >
             <span className="relative pb-1">
               talk to ira
               <span className="absolute left-0 bottom-0 w-full h-[1px] bg-ink transform origin-left scale-x-100 transition-transform duration-300 group-hover:scale-x-0" />
             </span>
-          </button>
+          </a>
         </div>
 
       </div>

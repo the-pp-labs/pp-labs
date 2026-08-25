@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 
 export default function AboutPage() {
   return (
-    <motion.main 
+    <motion.main
       initial={{ opacity: 0, filter: "blur(10px)", scale: 0.99 }}
       animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className="relative min-h-[100svh] w-full overflow-hidden bg-ink"
     >
-      
+
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

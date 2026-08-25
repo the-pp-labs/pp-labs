@@ -45,8 +45,8 @@ function ScrollStageInner({ children }: ScrollStageProps) {
     }
 
     const ctx = gsap.context(() => {
-      // Set all sections except the first one to be 100% translated down
-      gsap.set(sections.slice(1), { yPercent: 100 });
+      // Set all sections except the first one to be 110% translated down (fixes shadow bleeding at bottom)
+      gsap.set(sections.slice(1), { yPercent: 110 });
 
       // Mark as ready once GSAP has safely pushed everything down
       setIsReady(true);
@@ -94,11 +94,12 @@ function ScrollStageInner({ children }: ScrollStageProps) {
           duration: 1, // Explicitly set duration to map against timeline cleanly
         });
 
-        // The 3D stacking effect: push the previous section back
+        // The 3D stacking effect: push the previous section back and fade it out to prevent overlap bleed
         if (prevSec) {
           tl.to(prevSec, {
             scale: 0.92,
             yPercent: -15,
+            opacity: 0,
             ease: "none",
             duration: 1,
             transformOrigin: "top center",
