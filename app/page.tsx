@@ -14,20 +14,20 @@ export default function Page() {
     <div className="bg-transparent w-full">
       {/* Fixed Footer Revealed Natively */}
       <footer className="fixed bottom-0 left-0 w-full min-h-[100svh] bg-[#050505] flex flex-col items-center justify-center text-white -z-10 overflow-hidden">
-        
+
         {/* CENTER CONTENT */}
         <div className="flex flex-col items-center justify-center gap-8 md:gap-12 w-full max-w-4xl px-4">
-          
+
           {/* Top Email & Icons */}
           <div className="flex items-center gap-4 text-[10px] md:text-[11px] font-sans font-bold tracking-widest uppercase opacity-90">
             <a href="mailto:pplabs@gmail.com" className="hover:opacity-70 transition-opacity">
               pplabs@gmail.com
             </a>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="-mt-0.5">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
             </svg>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="-mt-0.5">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
             </svg>
           </div>
 
@@ -58,7 +58,7 @@ export default function Page() {
       </footer>
 
       {/* Opaque Content Wrapper to cover the footer until scroll finishes */}
-      <div className="relative z-10 w-full bg-[#050505]">
+      <div className="relative z-10 w-full bg-paper">
         <ScrollStage>
           {/* Layer 1: The Existing Homepage */}
           <ScrollSection>
@@ -74,14 +74,21 @@ export default function Page() {
                 <ArcCarousel />
               </div>
 
-              {/* Side Texts */}
-              <div className="absolute bottom-[22%] w-full left-0 z-30 pointer-events-none">
+              {/* Side Texts (Desktop Only) */}
+              <div className="hidden md:block absolute bottom-[22%] w-full left-0 z-30 pointer-events-none">
                 <p className="absolute right-[55%] md:right-[calc(50%+150px)] top-0 font-ui text-[10px] md:text-xs lg:text-sm font-bold uppercase tracking-widest text-ink transform -rotate-3 whitespace-nowrap">
                   FOUNDING ENGINEER
                 </p>
                 <p className="absolute left-[55%] md:left-[calc(50%+200px)] top-0 font-ui text-[10px] md:text-xs lg:text-sm font-bold uppercase tracking-widest text-ink transform rotate-3 whitespace-nowrap">
                   END-TO-END / FULL STACK
                 </p>
+              </div>
+
+              {/* Scrolling Bar (Mobile Only) */}
+              <div className="md:hidden absolute bottom-4 w-full left-0 z-30 pointer-events-none overflow-hidden whitespace-nowrap py-2 border-y border-ink/10 flex">
+                <div className="inline-block animate-marquee font-ui text-[10px] font-bold uppercase tracking-widest text-ink whitespace-nowrap">
+                  FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • FOUNDING PRODUCT DESIGNER • END-TO-END / FULL STACK • 
+                </div>
               </div>
 
               {/* Center Character Overlay */}
@@ -100,7 +107,9 @@ export default function Page() {
           {/* Layer 2: Rumik Section */}
           <ScrollSection>
             <div className="relative w-full h-full border-t border-paper/10 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-              <ExploreButton />
+              <div className="hidden md:block">
+                <ExploreButton />
+              </div>
               <RumikSection />
             </div>
           </ScrollSection>
@@ -127,7 +136,7 @@ export default function Page() {
           </ScrollSection>
         </ScrollStage>
       </div>
-      
+
       {/* Spacer to allow scrolling past the ScrollStage to reveal the fixed footer */}
       <div className="w-full min-h-[100svh] pointer-events-none relative z-0"></div>
     </div>

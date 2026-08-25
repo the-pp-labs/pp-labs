@@ -6,20 +6,20 @@ import { useReducedMotion } from "@/lib/useReducedMotion";
 
 export function CtaSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { margin: "-20%", once: true });
+  const isInView = useInView(containerRef, { margin: "-20%" });
   const prefersReducedMotion = useReducedMotion();
 
-  const animationProps = prefersReducedMotion 
+  const animationProps = prefersReducedMotion
     ? { initial: { opacity: 1, y: 0 }, animate: { opacity: 1, y: 0 } }
     : {
-        initial: { opacity: 0, y: 40 },
-        animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 },
-        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
-      };
+      initial: { opacity: 0, y: 40 },
+      animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }
+    };
 
   return (
     <div ref={containerRef} className="w-full h-full flex items-center justify-center py-8 md:py-16">
-      <motion.div 
+      <motion.div
         {...animationProps}
         className="w-[92%] md:w-[94%] max-w-[1400px] h-[85%] max-h-[700px] min-h-[400px] flex flex-col items-center justify-center rounded-[38px] md:rounded-[48px] border-[1.5px] border-white/70 px-6 md:px-16 text-center"
       >
@@ -27,7 +27,7 @@ export function CtaSection() {
           the best time to<br />
           start is now
         </h2>
-        
+
         <p className="font-ui text-[10px] md:text-xs lg:text-sm text-white/80 font-medium mb-10 md:mb-12 max-w-lg tracking-wide">
           Your website should feel like the business you are trying to become.
         </p>
