@@ -5,14 +5,18 @@ import gsap from "gsap";
 import { ProjectCard, Project } from "./ProjectCard";
 
 const mockProjects: Project[] = [
-  { id: 1, title: "AI Dashboard", category: "Product Design", image: "" },
-  { id: 2, title: "Mobile Banking UI", category: "Fintech", image: "" },
-  { id: 3, title: "Food/Product UI", category: "E-commerce", image: "" },
-  { id: 4, title: "Analytics Platform", category: "Data Vis", image: "" },
-  { id: 5, title: "E-commerce App", category: "Mobile Design", image: "" },
-  { id: 6, title: "Creative Portfolio", category: "Web Design", image: "" },
-  { id: 7, title: "Productivity App", category: "SaaS", image: "" },
-  { id: 8, title: "Smart Home UI", category: "IoT", image: "" },
+  { id: 1, title: "Rumik AI", category: "Product Design", image: "/assets/cards/rumik.png" },
+  { id: 2, title: "Dhanam Collections", category: "E-Commerce", image: "/assets/cards/dhanam.png" },
+  { id: 3, title: "Vabhaa Foods", category: "Brand Identity", image: "/assets/cards/vabhaa.png" },
+  { id: 4, title: "Creative Portfolio", category: "Web Experience", image: "/assets/cards/pawan-portfolio.png" },
+  { id: 5, title: "Iglegias", category: "Web Design", image: "/assets/cards/iglegias.png" },
+  { id: 6, title: "Design Portfolio", category: "Web Experience", image: "/assets/cards/vir-portfolio.png" },
+  { id: 7, title: "Rumik AI", category: "Product Design", image: "/assets/cards/rumik.png" },
+  { id: 8, title: "Dhanam Collections", category: "E-Commerce", image: "/assets/cards/dhanam.png" },
+  { id: 9, title: "Vabhaa Foods", category: "Brand Identity", image: "/assets/cards/vabhaa.png" },
+  { id: 10, title: "Creative Portfolio", category: "Web Experience", image: "/assets/cards/pawan-portfolio.png" },
+  { id: 11, title: "Iglegias", category: "Web Design", image: "/assets/cards/iglegias.png" },
+  { id: 12, title: "Design Portfolio", category: "Web Experience", image: "/assets/cards/vir-portfolio.png" },
 ];
 
 export function ArcCarousel() {
@@ -28,7 +32,7 @@ export function ArcCarousel() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Configuration for the 3D arc
+      // Configuration for the 3D arc (Original wide path)
       const radiusX = typeof window !== "undefined" && window.innerWidth < 768 ? 400 : 900;
       const radiusZ = typeof window !== "undefined" && window.innerWidth < 768 ? 300 : 600;
 
@@ -86,7 +90,6 @@ export function ArcCarousel() {
             z: z,
             scale: scale,
             opacity: opacity,
-            filter: `grayscale(${z < 0 ? 0 : normalizedDepth})`,
             zIndex: Math.round(z), // Deeper cards (negative Z) have lower zIndex
             rotateY: rotateY,
           });
@@ -138,7 +141,7 @@ export function ArcCarousel() {
   }, []);
 
   return (
-    <div className="relative w-full h-[100svh] overflow-hidden bg-paper flex flex-col items-center justify-center ring-scene">
+    <div className="relative w-full h-[100svh] overflow-hidden bg-transparent flex flex-col items-center justify-center ring-scene">
       {/* 3D Container */}
       <div
         ref={containerRef}
@@ -154,7 +157,7 @@ export function ArcCarousel() {
             project={project}
             onMouseEnter={() => (hoverRef.current = true)}
             onMouseLeave={() => (hoverRef.current = false)}
-            className="transition-[filter,opacity] duration-300" // We handle transform via GSAP so avoid transition on transform
+            className="transition-[filter,opacity] duration-300 project-card" // Added project-card class
           />
         ))}
       </div>

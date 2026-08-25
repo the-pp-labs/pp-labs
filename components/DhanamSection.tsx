@@ -66,7 +66,7 @@ export function DhanamSection() {
           <motion.div
             initial={maskInitial}
             animate={isVisible ? maskAnimate : maskInitial}
-            transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
             className="absolute inset-0 w-full h-full overflow-hidden"
           >
             {/* Phone Translation & Scale & 3D Rotation */}
@@ -74,7 +74,7 @@ export function DhanamSection() {
             <motion.div
               initial={{ ...phoneInitial, rotateX: 70, rotateY: 30, rotateZ: 20, opacity: 0 }}
               animate={isVisible ? { ...phoneAnimate, rotateX: 0, rotateY: 0, rotateZ: 0, opacity: 1 } : { ...phoneInitial, rotateX: 70, rotateY: 30, rotateZ: 20, opacity: 0 }}
-              transition={{ duration: 2.0, ease: [0.76, 0, 0.24, 1] }}
+              transition={{ duration: 2.0, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
               className="relative w-full h-full origin-bottom"
             >
               <Image

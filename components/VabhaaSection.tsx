@@ -63,14 +63,14 @@ export function VabhaaSection() {
           <motion.div
             initial={maskInitial}
             animate={isVisible ? maskAnimate : maskInitial}
-            transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }}
+            transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
             className="absolute inset-0 w-full h-full overflow-hidden"
           >
             {/* Laptop Translation & Scale */}
             <motion.div
               initial={{ ...laptopInitial, opacity: 0 }}
               animate={isVisible ? { ...laptopAnimate, opacity: 1 } : { ...laptopInitial, opacity: 0 }}
-              transition={{ duration: 2.0, ease: [0.76, 0, 0.24, 1] }}
+              transition={{ duration: 2.0, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
               className="relative w-full h-full origin-bottom"
             >
               <Image

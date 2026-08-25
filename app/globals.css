@@ -64,13 +64,4 @@ body {
 .project-card {
   opacity: var(--card-opacity, 1);
   transform: scale(var(--card-scale, 1)) translateZ(0px);
-  filter: grayscale(1) blur(var(--card-blur, 0px));
-}
-
-.project-card:hover {
-  opacity: 1 !important;
-  transform: scale(1.06) translateZ(70px) !important;
-  filter: grayscale(0) blur(0) !important;
-  outline: 2px solid var(--color-accent);
-  outline-offset: 6px;
 }

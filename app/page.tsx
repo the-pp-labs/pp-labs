@@ -64,9 +64,12 @@ export default function Page() {
           <ScrollSection>
             <main className="relative h-[100svh] w-full bg-paper overflow-hidden">
               {/* 3D DESIGN Background Text */}
-              <div className="absolute top-[18%] left-0 right-0 z-10 pointer-events-none flex justify-center">
-                <h1 className="text-[14vw] font-display font-black tracking-tight text-ink uppercase leading-none">
-                  3D DESIGN
+              {/* Background Text (Desktop removed per request) */}
+
+              {/* Background Text (Mobile) */}
+              <div className="md:hidden absolute top-[18%] left-0 right-0 z-10 pointer-events-none flex items-center justify-center text-center">
+                <h1 className="text-[12vw] font-display font-bold tracking-tight text-ink uppercase leading-none whitespace-nowrap">
+                  PRODUCT DESIGN
                 </h1>
               </div>
 

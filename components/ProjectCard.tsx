@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 export interface Project {
   id: number;
   title: string;
@@ -25,21 +25,33 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(
         className={`absolute top-1/2 left-1/2 w-[280px] sm:w-[340px] md:w-[400px] aspect-[4/5] -ml-[140px] sm:-ml-[170px] md:-ml-[200px] -mt-[175px] sm:-mt-[212px] md:-mt-[250px] bg-paper border border-ink/10 rounded-2xl shadow-xl overflow-hidden cursor-pointer transition-colors hover:border-ink/30 will-change-transform ${className}`}
         style={style}
       >
-        {/* Placeholder for the image/UI */}
-        <div className="relative w-full h-[65%] bg-smoke overflow-hidden">
-          {/* Subtle grid pattern for UI feel */}
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, #8a8a8a 1px, transparent 1px), linear-gradient(to bottom, #8a8a8a 1px, transparent 1px)",
-              backgroundSize: "20px 20px",
-            }}
-          />
-          {/* Mock UI elements */}
-          <div className="absolute top-4 left-4 right-4 h-32 bg-paper rounded-lg shadow-sm" />
-          <div className="absolute bottom-4 left-4 w-1/2 h-8 bg-paper rounded-md shadow-sm" />
-          <div className="absolute bottom-4 right-4 w-1/3 h-8 bg-paper rounded-md shadow-sm" />
+        {/* Image / Visual Area */}
+        <div className="relative w-full h-[65%] overflow-hidden">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 768px) 280px, 400px"
+            />
+          ) : (
+            <>
+              {/* Subtle grid pattern for UI feel fallback */}
+              <div
+                className="absolute inset-0 opacity-20"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right, #8a8a8a 1px, transparent 1px), linear-gradient(to bottom, #8a8a8a 1px, transparent 1px)",
+                  backgroundSize: "20px 20px",
+                }}
+              />
+              {/* Mock UI elements */}
+              <div className="absolute top-4 left-4 right-4 h-32 bg-paper rounded-lg shadow-sm" />
+              <div className="absolute bottom-4 left-4 w-1/2 h-8 bg-paper rounded-md shadow-sm" />
+              <div className="absolute bottom-4 right-4 w-1/3 h-8 bg-paper rounded-md shadow-sm" />
+            </>
+          )}
         </div>
 
         {/* Content */}

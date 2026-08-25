@@ -38,17 +38,18 @@ export function RumikSection() {
         <div className="relative w-[50%] sm:w-[45%] md:w-[75%] max-w-[420px] aspect-[1/2] md:aspect-[3/5]" style={{ perspective: "1200px" }}>
           {/* Circular Mask Container */}
           <motion.div
-            initial={maskInitial}
-            animate={isVisible ? maskAnimate : maskInitial}
-            transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1] }}
+            initial={prefersReducedMotion ? { clipPath: "circle(150% at 50% 50%)" } : { clipPath: "circle(0% at 50% 100%)" }}
+            animate={isVisible ? { clipPath: "circle(150% at 50% 50%)" } : prefersReducedMotion ? { clipPath: "circle(150% at 50% 50%)" } : { clipPath: "circle(0% at 50% 100%)" }}
+            transition={{ duration: 1.8, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
             className="absolute inset-0 w-full h-full overflow-hidden"
           >
             {/* Phone Translation & Scale & 3D Rotation */}
+            {/* Mirrored rotation: negative Y and Z so it swings in from the left */}
             <motion.div
-              initial={phoneInitial}
-              animate={isVisible ? phoneAnimate : phoneInitial}
-              transition={{ duration: 2.0, ease: [0.76, 0, 0.24, 1] }}
-              className="relative w-full h-full origin-center"
+              initial={prefersReducedMotion ? { y: "0%", scale: 1, opacity: 1 } : { y: "110%", scale: 0.94, rotateX: 70, rotateY: -30, rotateZ: -20, opacity: 0 }}
+              animate={isVisible ? { y: "0%", scale: 1, rotateX: 0, rotateY: 0, rotateZ: 0, opacity: 1 } : prefersReducedMotion ? { y: "0%", scale: 1, opacity: 1 } : { y: "110%", scale: 0.94, rotateX: 70, rotateY: -30, rotateZ: -20, opacity: 0 }}
+              transition={{ duration: 2.0, ease: [0.76, 0, 0.24, 1], delay: 0.3 }}
+              className="relative w-full h-full origin-bottom"
             >
               <Image
                 src="/assets/rumik.png"
