@@ -20,24 +20,22 @@ export function Navbar() {
       {/* Center - Sliding Tabs */}
       <nav className="relative flex border border-paper/20 rounded-full p-1 backdrop-blur-md pointer-events-auto">
         {/* Sliding Pill Background */}
-        <div 
+        <div
           className="absolute top-1 bottom-1 w-[80px] sm:w-[90px] bg-paper rounded-full transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)"
           style={{ transform: active === "DESIGN" ? "translateX(0)" : "translateX(100%)" }}
         />
-        
+
         <Link
           href="/"
-          className={`relative z-10 w-[80px] sm:w-[90px] py-2 flex items-center justify-center rounded-full transition-colors duration-300 ${
-            active === "DESIGN" ? "text-ink" : "text-paper hover:opacity-70"
-          }`}
+          className={`relative z-10 w-[80px] sm:w-[90px] py-2 flex items-center justify-center rounded-full transition-colors duration-300 ${active === "DESIGN" ? "text-ink" : "text-paper hover:opacity-70"
+            }`}
         >
           DESIGN
         </Link>
         <Link
           href="/about"
-          className={`relative z-10 w-[80px] sm:w-[90px] py-2 flex items-center justify-center rounded-full transition-colors duration-300 ${
-            active === "ABOUT" ? "text-ink" : "text-paper hover:opacity-70"
-          }`}
+          className={`relative z-10 w-[80px] sm:w-[90px] py-2 flex items-center justify-center rounded-full transition-colors duration-300 ${active === "ABOUT" ? "text-ink" : "text-paper hover:opacity-70"
+            }`}
         >
           ABOUT
         </Link>

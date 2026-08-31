@@ -13,8 +13,8 @@ export function ExploreButton() {
   };
 
   return (
-    <div className="explore-tab absolute bottom-full left-1/2 -translate-x-1/2 z-50">
-      <button 
+    <div className="explore-tab pointer-events-auto">
+      <button
         onClick={handleExploreClick}
         className="flex flex-col items-center justify-start pt-4 w-[64px] h-[72px] bg-ink rounded-t-full group hover:bg-accent transition-colors duration-300 cursor-pointer pointer-events-auto outline-none"
       >

@@ -60,6 +60,11 @@ export default function Page() {
 
       {/* Opaque Content Wrapper to cover the footer until scroll finishes */}
       <div className="relative z-10 w-full bg-paper">
+        {/* Fixed Explore Button overlay for Layer 1 */}
+        <div className="hidden md:block fixed bottom-0 left-1/2 -translate-x-1/2 z-50 explore-tab pointer-events-none">
+          <ExploreButton />
+        </div>
+        
         <ScrollStage>
           {/* Layer 1: The Existing Homepage */}
           <ScrollSection>
@@ -105,15 +110,14 @@ export default function Page() {
                   priority
                 />
               </div>
+
+
             </main>
           </ScrollSection>
 
           {/* Layer 2: Rumik Section */}
           <ScrollSection>
             <div className="relative w-full h-full border-t border-paper/10 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
-              <div className="hidden md:block">
-                <ExploreButton />
-              </div>
               <RumikSection />
             </div>
           </ScrollSection>

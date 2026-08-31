@@ -33,8 +33,8 @@ export function ArcCarousel() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Configuration for the 3D arc (Original wide path)
-      const radiusX = typeof window !== "undefined" && window.innerWidth < 768 ? 400 : 900;
-      const radiusZ = typeof window !== "undefined" && window.innerWidth < 768 ? 300 : 600;
+      const radiusX = typeof window !== "undefined" && window.innerWidth < 768 ? 600 : 900;
+      const radiusZ = typeof window !== "undefined" && window.innerWidth < 768 ? 450 : 600;
 
       const totalCards = mockProjects.length;
 
@@ -67,21 +67,14 @@ export function ArcCarousel() {
           const y = -Math.cos(angle) * 30; // Subtle arc in Y
 
           // Depth calculations
-          // We want cards to fade out when they come too close/pass behind the camera (z > 0)
           let opacity = 1;
           if (z > 0) {
             opacity = Math.max(0, 1 - (z / (radiusZ * 0.5)));
           }
 
-          // Scale based on Z depth. CSS translateZ also scales visually, 
-          // but we can add a slight physical scale to enhance the effect.
-          // At center (z = -radiusZ), scale is slightly smaller. 
-          // At edges (z = 0), scale is normal.
           const normalizedDepth = (z + radiusZ) / (radiusZ * 2); // 0 at center, 1 at back of camera
           const scale = 0.7 + normalizedDepth * 0.6;
 
-          // Rotation to make cards face inward (concave)
-          // angle=0 -> 0deg, angle=PI/4 -> -45deg (faces center)
           const rotateY = -angle * (180 / Math.PI);
 
           gsap.set(card, {
@@ -90,11 +83,24 @@ export function ArcCarousel() {
             z: z,
             scale: scale,
             opacity: opacity,
-            zIndex: Math.round(z), // Deeper cards (negative Z) have lower zIndex
+            zIndex: Math.round(z),
             rotateY: rotateY,
           });
         });
       };
+
+      // Set initial positions instantly before fading in
+      updateCards();
+      
+      // Fade in the container to avoid Flash of Unstyled Content (FOUC)
+      if (containerRef.current) {
+        gsap.to(containerRef.current, {
+          opacity: 1,
+          duration: 1.2,
+          ease: "power2.inOut",
+          delay: 0.1
+        });
+      }
 
       gsap.ticker.add(updateCards);
 
@@ -142,10 +148,10 @@ export function ArcCarousel() {
 
   return (
     <div className="relative w-full h-[100svh] overflow-hidden bg-transparent flex flex-col items-center justify-center ring-scene">
-      {/* 3D Container */}
+      {/* 3D Container (starts hidden, fades in to avoid FOUC) */}
       <div
         ref={containerRef}
-        className="relative w-full h-full"
+        className="relative w-full h-full opacity-0"
         style={{ transformStyle: "preserve-3d" }}
       >
         {mockProjects.map((project, i) => (
@@ -157,11 +163,10 @@ export function ArcCarousel() {
             project={project}
             onMouseEnter={() => (hoverRef.current = true)}
             onMouseLeave={() => (hoverRef.current = false)}
-            className="transition-[filter,opacity] duration-300 project-card" // Added project-card class
+            className="transition-[filter,opacity] duration-300 project-card"
           />
         ))}
       </div>
-
     </div>
   );
 }
