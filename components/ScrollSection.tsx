@@ -6,10 +6,11 @@ interface ScrollSectionProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const ScrollSection = forwardRef<HTMLDivElement, ScrollSectionProps>(
   ({ children, className = "", ...props }, ref) => {
+    const hasBg = className.includes("bg-");
     return (
       <div
         ref={ref}
-        className={`absolute inset-0 w-full h-[100svh] overflow-visible will-change-transform bg-paper ${className}`}
+        className={`absolute inset-0 w-full h-[100svh] overflow-visible will-change-transform ${hasBg ? "" : "bg-paper"} ${className}`}
         {...props}
       >
         {children}

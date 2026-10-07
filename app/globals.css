@@ -9,6 +9,18 @@
   
   --font-display: var(--font-anton), "Archivo Black", Impact, sans-serif;
   --font-ui: var(--font-montserrat), Inter, system-ui, sans-serif;
+  --font-retro: var(--font-silkscreen), monospace;
+  --font-retro-mono: var(--font-space-mono), monospace;
+
+  --color-retro-bg: #8B966F;
+  --color-retro-dark: #141811;
+  --color-retro-panel: #828D67;
+  --color-retro-surface: #98A37C;
+  --color-retro-input: #A1AC86;
+  --color-retro-input-focus: #B2BC97;
+  --color-retro-accent: #5A7788;
+  --color-retro-error: #A26868;
+  --color-retro-light: #D1DCC0;
   
   --animate-arrow-loop: arrow-loop 0.9s infinite;
   
@@ -64,4 +76,78 @@ body {
 .project-card {
   opacity: var(--card-opacity, 1);
   transform: scale(var(--card-scale, 1)) translateZ(0px);
+}
+
+/* Retro UI Styles inspired by GameBoy / vintage tactical console */
+.retro-box {
+  border: 2.5px solid #141811;
+  box-shadow: 4px 4px 0px #141811;
+}
+
+.retro-box-sm {
+  border: 2px solid #141811;
+  box-shadow: 2px 2px 0px #141811;
+}
+
+.retro-box-inset {
+  border: 2px solid #141811;
+  box-shadow: inset 2px 2px 0px rgba(20, 24, 17, 0.25);
+}
+
+.retro-pressable {
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.retro-pressable:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #141811;
+}
+
+.retro-pressable:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #141811;
+}
+
+.scanline-overlay {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.06) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.01),
+    rgba(0, 255, 0, 0.005),
+    rgba(0, 0, 255, 0.01)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
+
+/* Y2K / Nostalgic Desktop OS & Grid Paper Aesthetic */
+.desktop-grid {
+  background-color: #F4EFE6;
+  background-image: 
+    linear-gradient(to right, rgba(95, 110, 80, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(95, 110, 80, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.desktop-window {
+  background-color: #FAF7EE;
+  border: 2px solid #28331E;
+  border-radius: 16px;
+  box-shadow: 4px 6px 0px rgba(40, 51, 30, 0.16);
+  overflow: hidden;
+}
+
+.desktop-card {
+  background-color: #FFFFFF;
+  border: 1.5px solid #28331E;
+  border-radius: 12px;
+  box-shadow: 2px 2px 0px rgba(40, 51, 30, 0.12);
+  transition: all 0.12s ease;
+}
+
+.desktop-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 3px 3px 0px rgba(40, 51, 30, 0.2);
 }

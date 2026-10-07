@@ -85,7 +85,7 @@ function ScrollStageInner({ children }: ScrollStageProps) {
         if (i === 0 || !sec) return; // First section is already in place
 
         const prevSec = sections[i - 1];
-        const exploreBtn = sec.querySelector('.explore-tab');
+        const exploreBtn = prevSec ? prevSec.querySelector('.explore-tab') : null;
 
         // As the user scrolls, this moves the section up to cover the previous one
         tl.to(sec, {
@@ -107,6 +107,13 @@ function ScrollStageInner({ children }: ScrollStageProps) {
         }
 
         if (exploreBtn) {
+          // Move the button up at the same speed as the incoming section (100vh per duration 1)
+          tl.to(exploreBtn, {
+            y: "-100vh",
+            ease: "none",
+            duration: 1,
+          }, "<");
+
           // Fade the button out midway so it disappears naturally
           tl.to(exploreBtn, {
             autoAlpha: 0,

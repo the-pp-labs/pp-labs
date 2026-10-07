@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useReducedMotion } from "@/lib/useReducedMotion";
 
@@ -32,9 +33,12 @@ export function CtaSection() {
           Your website should feel like the business you are trying to become.
         </p>
 
-        <button className="group relative inline-flex items-center justify-center font-sans text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase transition-all px-6 py-2.5 md:px-8 md:py-3 bg-[#FDFBF7] text-[#0B0B0B] rounded-full hover:bg-white hover:-translate-y-0.5">
+        <Link
+          href="/start"
+          className="group relative inline-flex items-center justify-center font-sans text-[8px] md:text-[10px] font-bold tracking-[0.2em] uppercase transition-all px-6 py-2.5 md:px-8 md:py-3 bg-[#FDFBF7] text-[#0B0B0B] rounded-full hover:bg-white hover:-translate-y-0.5"
+        >
           LETS GO
-        </button>
+        </Link>
       </motion.div>
     </div>
   );
