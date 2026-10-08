@@ -8,7 +8,7 @@ import { Whatsapp } from "@/components/icons/Whatsapp";
 
 export function Navbar() {
   const pathname = usePathname();
-  if (pathname === "/start" || pathname === "/intake") return null;
+  if (pathname === "/start" || pathname === "/intake" || pathname?.startsWith("/admin")) return null;
 
   const active = pathname === "/about" ? "ABOUT" : "DESIGN";
 

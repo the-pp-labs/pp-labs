@@ -1076,6 +1076,16 @@ export function DesktopIntakePage() {
         </div>
       </div>
 
+      {/* Admin Link & System Copyright */}
+      <div className="max-w-md mx-auto text-center pt-4 pb-2 text-[10px] font-mono text-[#6A7859] flex items-center justify-center gap-4">
+        <span>PP LABS &copy; 2026</span>
+        <span>&bull;</span>
+        <Link href="/admin" className="hover:text-[#28331E] hover:underline flex items-center gap-1 font-semibold">
+          <span>ADMIN CONSOLE</span>
+          <span>→</span>
+        </Link>
+      </div>
+
       {/* Admin Leads Modal */}
       <DesktopAdminModal
         isOpen={adminOpen}

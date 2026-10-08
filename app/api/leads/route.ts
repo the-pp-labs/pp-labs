@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { sendLeadNotificationEmail } from "@/lib/email";
 
 const leadsFilePath = path.join(process.cwd(), "data", "leads.json");
 
 // Helper to read leads safely
-function getLeads() {
+export function getLeads(): any[] {
   try {
     if (!fs.existsSync(leadsFilePath)) {
       return [];
@@ -19,7 +20,7 @@ function getLeads() {
 }
 
 // Helper to write leads safely
-function saveLeads(leads: any[]) {
+export function saveLeads(leads: any[]) {
   try {
     const dir = path.dirname(leadsFilePath);
     if (!fs.existsSync(dir)) {
@@ -48,8 +49,6 @@ export async function POST(request: Request) {
       phone,
       preferred_contact_method,
       website_type,
-      website_purpose,
-      business_description,
       budget_range,
       timeline,
       contact_permission,
@@ -75,20 +74,23 @@ export async function POST(request: Request) {
     const submission_time = now.toTimeString().split(" ")[0];
 
     // Format features list for summary
-    const featuresList = Array.isArray(body.required_features) && body.required_features.length > 0
-      ? body.required_features.join(", ")
-      : "Standard modern features";
+    const featuresList =
+      Array.isArray(body.required_features) && body.required_features.length > 0
+        ? body.required_features.join(", ")
+        : "Standard modern features";
 
     // Format design preferences for summary
-    const designList = Array.isArray(body.design_preferences) && body.design_preferences.length > 0
-      ? body.design_preferences.join(", ")
-      : "Not specified";
+    const designList =
+      Array.isArray(body.design_preferences) && body.design_preferences.length > 0
+        ? body.design_preferences.join(", ")
+        : "Not specified";
 
-    const hasExistingSite = body.has_existing_website === "Yes" && body.existing_website_url
-      ? `Yes (${body.existing_website_url})`
-      : "No";
+    const hasExistingSite =
+      body.has_existing_website === "Yes" && body.existing_website_url
+        ? `Yes (${body.existing_website_url})`
+        : "No";
 
-    // Build the concise Lead Summary (PRD Section 14)
+    // Build concise Lead Summary (PRD Section 14)
     const summary = [
       `Lead: ${full_name}`,
       `Business: ${business_name}`,
@@ -106,6 +108,7 @@ export async function POST(request: Request) {
       submission_date,
       submission_time,
       lead_status: "New",
+      notes: "",
       ...body,
       summary,
     };
@@ -114,10 +117,19 @@ export async function POST(request: Request) {
     existingLeads.unshift(newLead);
     saveLeads(existingLeads);
 
+    // Trigger instant email notification in background (non-blocking for user speed)
+    let emailResult = null;
+    try {
+      emailResult = await sendLeadNotificationEmail(newLead);
+    } catch (emailErr) {
+      console.error("Non-fatal email dispatch error:", emailErr);
+    }
+
     return NextResponse.json({
       success: true,
       lead: newLead,
       summary,
+      emailNotification: emailResult,
     });
   } catch (error: any) {
     console.error("API /api/leads error:", error);
@@ -130,9 +142,9 @@ export async function POST(request: Request) {
 
 export async function PATCH(request: Request) {
   try {
-    const { id, status } = await request.json();
-    if (!id || !status) {
-      return NextResponse.json({ success: false, error: "Missing id or status" }, { status: 400 });
+    const { id, status, notes } = await request.json();
+    if (!id) {
+      return NextResponse.json({ success: false, error: "Missing lead id" }, { status: 400 });
     }
 
     const leads = getLeads();
@@ -141,10 +153,40 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ success: false, error: "Lead not found" }, { status: 404 });
     }
 
-    leads[leadIndex].lead_status = status;
+    if (status !== undefined) {
+      leads[leadIndex].lead_status = status;
+    }
+    if (notes !== undefined) {
+      leads[leadIndex].notes = notes;
+    }
+
+    leads[leadIndex].updated_at = new Date().toISOString();
     saveLeads(leads);
 
     return NextResponse.json({ success: true, lead: leads[leadIndex] });
+  } catch (error: any) {
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ success: false, error: "Missing lead id" }, { status: 400 });
+    }
+
+    const leads = getLeads();
+    const filtered = leads.filter((l: any) => l.id !== id);
+
+    if (filtered.length === leads.length) {
+      return NextResponse.json({ success: false, error: "Lead not found" }, { status: 404 });
+    }
+
+    saveLeads(filtered);
+    return NextResponse.json({ success: true, message: `Lead ${id} deleted.` });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
